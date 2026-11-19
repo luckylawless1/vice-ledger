@@ -1,25 +1,86 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>GTA VI trophy checklist</title>
+<title>Vice Ledger — GTA VI Trophy Guide &amp; Tracker</title>
+<link rel="icon" href="icon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<header>
-  <h1>GTA VI trophy checklist</h1>
-  <p id="progress">0 of 55 earned</p>
+<header class="dash">
+  <div class="dash-top">
+    <div class="brand">
+      <h1>Vice <span>Ledger</span></h1>
+      <p class="tag">Grand Theft Auto VI · PlayStation 5 — the offline trophy guide &amp; platinum tracker</p>
+    </div>
+    <div class="savebox">
+      <span id="seed-tag" class="seedtag" hidden>demo seed</span>
+      <button id="btn-export" type="button">Export progress</button>
+      <label class="btnlike" for="file-import">Import</label>
+      <input id="file-import" type="file" accept="application/json" hidden>
+      <button id="btn-reset" type="button">Reset</button>
+    </div>
+  </div>
+  <div class="dash-stats">
+    <div class="bigcount"><span id="earned-count">0</span><small> / 55 earned</small></div>
+    <div class="bar-wrap">
+      <div class="bar"><div id="bar-fill"></div></div>
+      <div id="bar-pct" class="bar-pct"></div>
+    </div>
+    <div id="grade-counts" class="grade-counts"></div>
+    <div id="forecast" class="forecast"></div>
+  </div>
+  <div id="kind-bars" class="kind-bars"></div>
+  <nav class="tabs" id="tabs">
+    <button type="button" data-view="checklist" class="on">Checklist</button>
+    <button type="button" data-view="roadmap">Roadmap</button>
+    <button type="button" data-view="missables">Missables</button>
+    <button type="button" data-view="planner">Next Up</button>
+    <button type="button" data-view="journey">Journey</button>
+    <button type="button" data-view="sources">Sources</button>
+    <button type="button" data-view="matrix">Source Matrix</button>
+  </nav>
 </header>
-<div class="controls">
-  <label>Grade <select id="grade"><option value="all">All</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-  <button id="export" type="button">Export progress</button>
-  <label class="import">Import progress <input id="import" type="file" accept="application/json"></label>
-</div>
-<table>
-  <thead><tr><th>Earned</th><th>Trophy</th><th>Grade</th><th>How to get it</th></tr></thead>
-  <tbody id="rows"></tbody>
-</table>
-<script type="module" src="app.js"></script>
+
+<main>
+  <section id="view-checklist" class="view">
+    <div id="audit-strip" class="audit"></div>
+    <div id="warn-banner" class="warn"></div>
+    <div id="nextup-bar" class="nextup"></div>
+    <div class="filters">
+      <div class="chips" id="kind-chips"></div>
+      <div class="filter-tools">
+        <select id="grade-filter" aria-label="Filter by grade">
+          <option value="all">All grades</option>
+          <option value="platinum">Platinum</option>
+          <option value="gold">Gold</option>
+          <option value="silver">Silver</option>
+          <option value="bronze">Bronze</option>
+        </select>
+        <input id="search" type="search" placeholder="Search trophies…" aria-label="Search trophies">
+        <label class="chk"><input type="checkbox" id="hide-earned"> Hide earned</label>
+        <label class="chk"><input type="checkbox" id="spoilers"> Spoiler shield</label>
+      </div>
+    </div>
+    <div class="layout">
+      <div id="list" class="list"></div>
+      <aside id="guide-pane" class="pane" aria-label="Trophy guide"></aside>
+    </div>
+  </section>
+
+  <section id="view-roadmap" class="view" hidden></section>
+  <section id="view-missables" class="view" hidden></section>
+  <section id="view-planner" class="view" hidden></section>
+  <section id="view-journey" class="view" hidden></section>
+  <section id="view-sources" class="view" hidden></section>
+  <section id="view-matrix" class="view" hidden></section>
+</main>
+
+<footer>
+  <p><strong>Vice Ledger</strong> — every guide in our own words, every step cited. Official trophy names, descriptions and grades are PlayStation's, via the list sources in the Sources view. Progress never leaves this browser unless you export it.</p>
+</footer>
+
+<script type="module" src="js/main.js"></script>
 </body>
 </html>
